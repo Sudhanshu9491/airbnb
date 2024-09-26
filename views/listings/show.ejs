@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show One Item</title>
+</head>
+<body>
+    <h3>Listing Details</h3>
+    <form method="GET" action="/listings/new">
+        <button>Create new listing</button>
+    </form>
+    <ul>
+        <li><%= list.title %></li>
+        <li><%= list.description %></li>
+        <li><span>&#8377;</span><%= list.price.toLocaleString("en-IN") %></li>
+        <li><%= list.location %></li>
+        <li><%= list.country %></li>
+    </ul>
+    <br>
+    <!-- <a href="/listings/<%= list._id %>/edit">Edit</a> -->
+    <br>
+    <!-- <a href="">Delete</a> -->
+    <form method="get" action="/listings/<%= list._id %>/edit">
+        <button>Edit</button>
+    </form>
+    <br>
+    <form method="get" action="/listings/<%= list._id %>/delete">
+        <button>Delete</button>
+    </form>
+</body>
+</html>

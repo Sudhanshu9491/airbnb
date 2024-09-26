@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+</head>
+<body>
+    <h1>Listings </h1>
+    <ul>
+        <% for(list of allListing){ %>
+            <!-- anchor tag will reflect to get request with the listed post id -->
+            <li><a href="/listings/<%= list._id %>"><%= list.title %></a></li>
+        <% } %>
+    </ul>
+</body>
+</html>
