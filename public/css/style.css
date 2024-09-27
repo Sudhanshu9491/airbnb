@@ -1,0 +1,9 @@
+body{
+    background-color: rgb(105, 87, 121);
+    color: white;
+}
+a{
+    text-decoration: none;
+    color: white;
+    text-decoration: underline;
+}
