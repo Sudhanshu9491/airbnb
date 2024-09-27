@@ -76,7 +76,7 @@ body{
     flex-wrap: wrap;
 }
 
-.card{
+.card,.cardShow{
     border: none !important;
     margin: auto;
     width: auto;
@@ -94,7 +94,7 @@ body{
     padding: 0;
 }
 
-.card img:hover{
+.card-img:hover{
     transition-duration: .3s;
     /* transition-property: all; */
     transition-timing-function: ease-in-out;
