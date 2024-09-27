@@ -45,7 +45,7 @@ app.post("/listings",async (req,res)=>{
     newListing.save().then(()=>{
         console.log("New Data is saved sucessfull");
     }).catch((err)=>{
-        console.err(err);
+        console.error(err);
     })
     res.redirect("/listings");
 

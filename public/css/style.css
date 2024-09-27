@@ -2,6 +2,18 @@
     margin: 0;
     padding: 0;
 } */
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* for stick the footer */
+.container{
+    flex: 1;
+}
+
 /* NavBar Start */
 .navbar {
     height: 5rem;
