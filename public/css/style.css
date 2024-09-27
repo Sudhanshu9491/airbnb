@@ -1,3 +1,7 @@
+/* *{
+    margin: 0;
+    padding: 0;
+} */
 /* NavBar Start */
 .navbar {
     height: 5rem;
@@ -52,3 +56,50 @@
 }
 
 /* Footer End */
+
+/* AllCards start */
+
+.allCards{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    border: none !important;
+    margin: auto;
+    width: auto;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    height: 300px;
+    width: 300px;
+    /* width: 100%;
+    object-fit: cover !important; */
+}
+
+.card-body{
+    padding: 0;
+}
+
+.card img:hover{
+    transition-duration: .3s;
+    /* transition-property: all; */
+    transition-timing-function: ease-in-out;
+    transform: scale(1.1);
+}
+
+/* AllCards End */
+
+/* card-img-overlay Start */
+
+/* .card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: .2;
+    background-color: white;
+} */
+
+
+/* card-img-overlay End */
