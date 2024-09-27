@@ -1,9 +1,19 @@
-<% layout('./layout/boilerplates') -%><body>
-    <h1>Listings </h1>
-    <ul>
-        <% for(list of allListing){ %>
+<% layout('./layout/boilerplates') -%>
+<body>
+  <h1>Listings</h1>
+  <div class="allCards rows-cols-lg-3 rows-cols-md-2 rows-cols-sm-1">
+    <% for(list of allListing){ %>
+        <div class="card" style="width: 19rem ">
+            <img src="<%= list.image %>" class="card-img-top" style="height:20rem" alt="House Imge" />
+            <!-- <div class="card-img-overlay"><b>See Photos</b></div> -->
+            <div class="card-body">
+            <h5 class="card-title"><%= list.title %></h5>
+            <p class="card-price">Price : <%= list.price.toLocaleString("en-IN") %>/Day</p>
+            <!-- <p class="card-text"><%= list.description %></p> -->
             <!-- anchor tag will reflect to get request with the listed post id -->
-            <li><a href="/listings/<%= list._id %>"><%= list.title %></a></li>
-        <% } %>
-    </ul>
+            <a href="/listings/<%= list._id %>" class="btn btn-primary">View</a>
+            </div>
+        </div>
+      <% } %>
+  </div>
 </body>
