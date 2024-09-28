@@ -102,7 +102,8 @@ app.get("/testlisting",async (req,res)=>{
 
 // Root of the server
 app.get("/",(req,res)=>{
-    res.send("This is the set Up of App.js");
+    res.render("./listings/home.ejs");
+    // res.send("This is the set Up of App.js");
 })
 // listenig app
 app.listen(8080,()=>{
