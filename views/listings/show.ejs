@@ -12,7 +12,7 @@
             <ul>
                 <li class="card-text"><%= list.title %></li>
                 <li class="card-text"><%= list.description %></li>
-                <li class="card-text"><span>&#8377;</span><%= list.price.toLocaleString("en-IN") %></li>
+                <li class="card-text"><span>&#8377;</span><%= Number(list.price).toLocaleString("en-IN") %></li>
                 <li class="card-text"><%= list.location %></li>
                 <li class="card-text"><%= list.country %></li>
             </ul>

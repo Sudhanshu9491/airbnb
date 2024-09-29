@@ -8,7 +8,7 @@
             <!-- <div class="card-img-overlay"><b>See Photos</b></div> -->
             <div class="card-body">
             <h5 class="card-title"><%= list.title %></h5>
-            <p class="card-price">Price : <%= list.price.toLocaleString("en-IN") %>/Day</p>
+            <p class="card-price">Price : <%= Number(list.price).toLocaleString("en-IN") %>/Day</p>
             <!-- <p class="card-text"><%= list.description %></p> -->
             <!-- anchor tag will reflect to get request with the listed post id -->
             <a href="/listings/<%= list._id %>" class="btn btn-primary">View</a>

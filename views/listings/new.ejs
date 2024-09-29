@@ -3,30 +3,30 @@
     <div class="row mt-3">
         <div class="col-8 offset-2">
             <h3>Create a new listing</h3>
-            <form method="post" action="/listings"> 
+            <form method="post" action="/listings" class="needs-validation" novalidate> 
                 <div class="mb-3"><label class="form-label" for="title">Title : </label>
-                    <input class="form-control" type="text" name="listing[title]" placeholder="Enter the title">
+                    <input required class="form-control" type="text" name="listing[title]" placeholder="Enter the title">
                 </div>
                 <!-- <br><br> -->
                 <div class="mb-3"><label class="form-label" for="description">Description : </label>
-                    <textarea class="form-control" type="listing[description]" name="description" placeholder="Enter the description"></textarea>
+                    <textarea required class="form-control" type="listing[description]" name="description" placeholder="Enter the description"></textarea>
                 </div>
                 <!-- <br><br> -->
                 <div class="mb-3"><label class="form-label" for="image">Image : </label>
-                    <input class="form-control" type="text" name="listing[image]" placeholder="Enter the image url/link">
+                    <input  class="form-control" type="text" name="listing[image]" placeholder="Enter the image url/link">
                 </div>
                 <!-- <br><br> -->
                 <div class="row">
                     <div class="mb-3 col-md-4"><label class="form-label" for="price">Price : </label>
-                        <input class="form-control" type="number" name="listing[price]" placeholder="Enter the price ">
+                        <input required class="form-control" type="number" name="listing[price]" placeholder="Enter the price ">
                     </div>
                     <!-- <br><br> -->
                     <div class="mb-3 col-md-8"><label class="form-label" for="country">Country : </label>
-                        <input class="form-control" type="text" name="listing[country]" placeholder="Enter the country ">
+                        <input required class="form-control" type="text" name="listing[country]" placeholder="Enter the country ">
                     </div>
                 </div>
                 <div class="mb-3"><label class="form-label" for="location">Location : </label>
-                    <input class="form-control" type="text" name="listing[location]" placeholder="Enter the location ">
+                    <input required class="form-control" type="text" name="listing[location]" placeholder="Enter the location ">
                 </div>
                 <!-- <br><br> -->
                 <br>
