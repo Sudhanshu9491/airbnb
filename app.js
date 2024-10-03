@@ -7,6 +7,7 @@
     const ejsMate=require('ejs-mate');
     const wrapAsync=require("./utils/wrapAsync.js");
     const ExpressError=require("./utils/ExpressError.js");
+    const {listingSchema} =require("./schema.js");
 
     // Url is taken from mongodb website -->/wanderlust is a project name
     const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
@@ -41,22 +42,21 @@
         res.render("./listings/new.ejs");
     })
 
-    app.post("/listings",wrapAsync(async (req,res,next)=>{
-        // let {title,description,image,price,location,country}=req.body;
-        // if nothing will come via hoppscotch then
-        if(!req.body.listing){
-            throw new ExpressError(400,"Set Valid Data For Listing");
+    const validateListing=(req,res,next)=>{
+        let {error} =listingSchema.validate(req.body);
+        // console.log(result);
+        if(error){
+            throw new ExpressError(404,error);
         }else{
-            const newListing=new listing(req.body.listing);
-            await newListing.save();
-            res.redirect("/listings");
+            next();
         }
-        // try{
-            //     await newListing.save();
-            //     res.redirect("/listings");
-        // }catch(err){
-            //     next(err);
-        // }
+    }
+
+    app.post("/listings",validateListing,wrapAsync(async (req,res,next)=>{
+        const newListing=new listing(req.body.listing);
+        await newListing.save();
+        res.redirect("/listings");
+        
     }))
 
 
@@ -85,11 +85,8 @@
     }))
 
     // Update route
-    app.put("/listings/:id",wrapAsync(async (req,res)=>{
+    app.put("/listings/:id",validateListing,wrapAsync(async (req,res)=>{
         // if nothing will come via hoppscotch then
-        if(!req.body.listing){
-            throw new ExpressError(400,"Set Valid Data For Listing");
-        }
         let {id}=req.params;
         await listing.findByIdAndUpdate(id,{...req.body.listing});
         res.redirect(`/listings/${id}`);
