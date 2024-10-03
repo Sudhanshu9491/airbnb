@@ -7,6 +7,7 @@
     const ejsMate=require('ejs-mate');
     const wrapAsync=require("./utils/wrapAsync.js");
     const ExpressError=require("./utils/ExpressError.js");
+    const {listingSchema} =require("./schema.js");
 
     // Url is taken from mongodb website -->/wanderlust is a project name
     const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
@@ -44,19 +45,15 @@
     app.post("/listings",wrapAsync(async (req,res,next)=>{
         // let {title,description,image,price,location,country}=req.body;
         // if nothing will come via hoppscotch then
-        if(!req.body.listing){
-            throw new ExpressError(400,"Set Valid Data For Listing");
-        }else{
-            const newListing=new listing(req.body.listing);
-            await newListing.save();
-            res.redirect("/listings");
+        const result=listingSchema.validate(req.body);
+        if(result.error){
+            throw new ExpressError(404,result.error);
         }
-        // try{
-            //     await newListing.save();
-            //     res.redirect("/listings");
-        // }catch(err){
-            //     next(err);
-        // }
+        console.log(result);
+        const newListing=new listing(req.body.listing);
+        await newListing.save();
+        res.redirect("/listings");
+        
     }))
 
 
