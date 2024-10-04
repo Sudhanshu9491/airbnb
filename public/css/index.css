@@ -7,8 +7,11 @@ h1{
     text-decoration: underline;
     text-decoration-color: red;
 }
+.card-imgg:hover{
+    opacity: 0.7;
+}
 @media (max-width:991px) {
-    .card-img{
+    .card-imgg{
         height: 15rem;
     }    
 }
@@ -18,7 +21,7 @@ h1{
         width: 10rem !important ; 
     }    
 } */
- .card-img{
+ .card-imgg{
     width: 20rem;
     height: 20rem;
  }
