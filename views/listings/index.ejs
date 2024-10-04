@@ -1,4 +1,5 @@
 <% layout('./layout/boilerplates') -%>
+<link rel="stylesheet" href="./css/index.css">
 <body>
   <h1>Listings</h1>
   <% if (allListing.length==0) { %>
@@ -6,17 +7,21 @@
   <% } else{  %>
     <div class="allCards rows-cols-lg-3 rows-cols-md-2 rows-cols-sm-1">
       <% for(list of allListing){ %>
-          <div class="card" style="width: 19rem ">
-              <img src="<%= list.image %>" class="card-img card-img-top" style="height:20rem" alt="House Imge" />
+        <div class="card" >
+            <a href="/listings/<%= list._id %>" class="mainA">
+              <img src="<%= list.image %>" class="card-img card-img-top" alt="House Imge" />
               <!-- <div class="card-img-overlay"><b>See Photos</b></div> -->
               <div class="card-body">
               <h5 class="card-title"><%= list.title %></h5>
               <p class="card-price">Price : <%= Number(list.price).toLocaleString("en-IN") %>/Day</p>
               <!-- <p class="card-text"><%= list.description %></p> -->
               <!-- anchor tag will reflect to get request with the listed post id -->
-              <a href="/listings/<%= list._id %>" class="btn btn-primary">View</a>
-              <a  href="/listings/<%= list._id %>/delete" class="btn btn-primary">Delete</a>
-              </div>
+              
+              <!-- View -->
+              <!-- <a href="/listings/<%= list._id %>" class="btn btn-primary">View</a> -->
+              <!-- <a  href="/listings/<%= list._id %>/delete" class="btn btn-primary">Delete</a> -->
+            </div>
+          </a>
           </div>
         <% } %>
     </div>

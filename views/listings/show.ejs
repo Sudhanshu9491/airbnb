@@ -1,11 +1,31 @@
 <% layout('./layout/boilerplates') -%><body>
+<link rel="stylesheet" href="./css/show.css">
+<style>
+    h3{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        text-decoration: underline;
+        text-decoration-color: red;
+    }
+    .showCard{
+        width: 40rem;
+    }
+    @media (max-width:762px) {
+        .showCard{
+            width: 20rem;
+        }
+    }
+</style>
 <body>
     <h3>Listing Details</h3>
     <!-- <form method="GET" action="/listings/new">
         <button>Create new listing</button>
     </form> -->
-    <div class="card" style="width: 50rem;">
-        <img src="<%= list.image %>" class="card-img-top cardShow-img-top" style="height: 30rem;" alt="image">
+    <div class="card showCard ">
+        <img src="<%= list.image %>" class="card-img-top cardShow-img-top" alt="image">
         <div class="card-body">
             <h5 class="card-title"><%= list.title %></h5>
             <p class="card-text"><%= list.description %></p>

@@ -1,7 +1,19 @@
 <% layout('./layout/boilerplates') -%><body>
+<link rel="stylesheet" href="./css/edit.css">
+<style>
+    h3{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        text-decoration: underline;
+        text-decoration-color: red;
+    }
+</style>
 <body>
     <div class="row mt-3">
-        <div class="col-8 offset-2">
+        <div class="col-10 offset-1">
             <h3>Edit a listing</h3>
         <form method="POST" action="/listings/<%= data._id %>?_method=PUT" class="needs-validation" novalidate> 
             <div class="md-3">
