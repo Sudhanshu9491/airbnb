@@ -20,9 +20,13 @@
               <!-- View -->
               <!-- <a href="/listings/<%= list._id %>" class="btn btn-primary">View</a> -->
               <!-- <a  href="/listings/<%= list._id %>/delete" class="btn btn-primary">Delete</a> -->
+              <form method="get" action="/listings/<%= list._id %>/delete">
+                <button >Delete</button>
+            </form>
             </div>
           </a>
           </div>
+          
         <% } %>
     </div>
   <% } %>
