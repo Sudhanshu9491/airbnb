@@ -8,6 +8,7 @@
     const wrapAsync=require("./utils/wrapAsync.js");
     const ExpressError=require("./utils/ExpressError.js");
     const {listingSchema} =require("./schema.js");
+    const Review =require('./models/review.js');
 
     // Url is taken from mongodb website -->/wanderlust is a project name
     const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
@@ -109,6 +110,20 @@
         res.send("saved in db")
     }))
 
+
+    // Reviews 
+    // Post route
+    app.post("/listings/:id/review", async (req, res) => {
+        let Listing = await listing.findById(req.params.id);  // renamed variable
+        let newReview = new Review(req.body.review);
+    
+        Listing.reviews.push(newReview);  // ensure correct array name (reviews)
+        await Listing.save();
+        
+        console.log("new review saved");
+        // res.send("new review saved");
+        res.redirect(`/listings/${Listing._id}`);
+    });
 
     // Root of the server
     app.get("/",(req,res)=>{
