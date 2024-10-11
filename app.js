@@ -1,14 +1,18 @@
     const express=require('express');
     const app = express();
     const mongoose =require('mongoose');
-    const listing =require('./models/listing.js');
     const path=require('path');
     const methodOverride=require('method-override');
     const ejsMate=require('ejs-mate');
+    const Review =require('./models/review.js');
     const wrapAsync=require("./utils/wrapAsync.js");
     const ExpressError=require("./utils/ExpressError.js");
     const {listingSchema,reviewSchema} =require("./schema.js");
-    const Review =require('./models/review.js');
+    const listing =require('./models/listing.js');
+
+    // Router 
+    const listings=require("./routes/listing.js")
+
 
     // Url is taken from mongodb website -->/wanderlust is a project name
     const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
@@ -30,19 +34,6 @@
     app.engine("ejs",ejsMate);
     app.use(express.static(path.join(__dirname,"/public")));
 
-    // All data show in all listining
-    app.get("/listings",wrapAsync(async (req,res)=>{
-        const allListing=await listing.find({});
-        res.render("./listings/index.ejs",{allListing})
-        // res.send("All Data Will Show soon");
-    }))
-
-    // we write this before the listings/:id becouse the listings is same so it is searching the id in the database
-    // Created new listing
-    app.get("/listings/new",(req,res)=>{
-        res.render("./listings/new.ejs");
-    })
-
     const validateListing=(req,res,next)=>{
         let {error} =listingSchema.validate(req.body);
         // console.log(result);
@@ -52,6 +43,7 @@
             next();
         }
     }
+    
     const validateReview=(req,res,next)=>{
         let {error} =reviewSchema.validate(req.body);
         // console.log(result);
@@ -63,37 +55,7 @@
         }
     }
 
-    app.post("/listings",validateListing,wrapAsync(async (req,res,next)=>{
-        const newListing=new listing(req.body.listing);
-        await newListing.save();
-        res.redirect("/listings");
-        
-    }))
-
-
-    // Inside of any listed item view
-    app.get("/listings/:id",wrapAsync(async (req,res,next)=>{
-        let {id}=req.params;
-        const list = await listing.findById(id).populate("reviews");
-        console.log(list);
-        res.render("./listings/show.ejs",{list});
-        // res.send(";dhja");
-    }))
-
-    // Edit Route
-    app.get("/listings/:id/edit",wrapAsync(async (req,res)=>{
-        let {id} =req.params;
-        let data=await listing.findById(id);
-        res.render("./listings/edit.ejs",{data});
-        // res.send("sldfj");
-    }))
-    app.get("/listings/:id/delete",wrapAsync(async (req,res)=>{
-        let {id} =req.params;
-        console.log(id);
-        await listing.findByIdAndDelete(id);
-        res.redirect("/listings");
-        // res.send("sldfj");
-    }))
+    app.use("/listings",listings);
 
     // Update route
     app.put("/listings/:id",validateListing,wrapAsync(async (req,res)=>{
