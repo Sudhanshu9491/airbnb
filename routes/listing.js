@@ -2,7 +2,7 @@ const express  = require('express');
 const router= express.Router();
 const wrapAsync=require("../utils/wrapAsync.js");
 const ExpressError=require("../utils/ExpressError.js");
-const {listingSchema,reviewSchema} =require("../schema.js");
+const {listingSchema} =require("../schema.js");
 const listing =require('../models/listing.js');
 
 
@@ -44,6 +44,14 @@ router.post("/",validateListing,wrapAsync(async (req,res,next)=>{
     await newListing.save();
     res.redirect("/listings");
     
+}))
+
+ // Update route
+ router.put("/:id",validateListing,wrapAsync(async (req,res)=>{
+    // if nothing will come via hoppscotch then
+    let {id}=req.params;
+    await listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect(`/listings/${id}`);
 }))
 
 // Edit Route

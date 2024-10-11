@@ -4,14 +4,15 @@
     const path=require('path');
     const methodOverride=require('method-override');
     const ejsMate=require('ejs-mate');
-    const Review =require('./models/review.js');
-    const wrapAsync=require("./utils/wrapAsync.js");
+    // const Review =require('./models/review.js');
+    // const wrapAsync=require("./utils/wrapAsync.js");
     const ExpressError=require("./utils/ExpressError.js");
-    const {listingSchema,reviewSchema} =require("./schema.js");
-    const listing =require('./models/listing.js');
+    // const {listingSchema,reviewSchema} =require("./schema.js");
+    // const listing =require('./models/listing.js');
 
     // Router 
     const listings=require("./routes/listing.js")
+    const reviews=require("./routes/review.js")
 
 
     // Url is taken from mongodb website -->/wanderlust is a project name
@@ -34,77 +35,21 @@
     app.engine("ejs",ejsMate);
     app.use(express.static(path.join(__dirname,"/public")));
 
-    const validateListing=(req,res,next)=>{
-        let {error} =listingSchema.validate(req.body);
-        // console.log(result);
-        if(error){
-            throw new ExpressError(404,error);
-        }else{
-            next();
-        }
-    }
+    // const validateListing=(req,res,next)=>{
+    //     let {error} =listingSchema.validate(req.body);
+    //     // console.log(result);
+    //     if(error){
+    //         throw new ExpressError(404,error);
+    //     }else{
+    //         next();
+    //     }
+    // }
     
-    const validateReview=(req,res,next)=>{
-        let {error} =reviewSchema.validate(req.body);
-        // console.log(result);
-        if(error){
-            let errMsg=error.details.map((el)=>el.message).join(",")
-            throw new ExpressError(404,errMsg);
-        }else{
-            next();
-        }
-    }
+    
 
     app.use("/listings",listings);
+    app.use("/listings/:id/review",reviews);
 
-    // Update route
-    app.put("/listings/:id",validateListing,wrapAsync(async (req,res)=>{
-        // if nothing will come via hoppscotch then
-        let {id}=req.params;
-        await listing.findByIdAndUpdate(id,{...req.body.listing});
-        res.redirect(`/listings/${id}`);
-    }))
-
-    // Delete Route
-
-    // for one data test
-    app.get("/testlisting",wrapAsync(async (req,res)=>{
-        let sampleListing=new listing({
-            title:"New Home",
-            description:"Neat and clean",
-            // image:,
-            price:1200,
-            location:"Kanpur",
-            country:"India"
-        })
-        await sampleListing.save();
-        console.log("Sample was saved");
-        res.send("saved in db")
-    }))
-
-
-    // Reviews 
-    // Post route
-    app.post("/listings/:id/review",validateReview,wrapAsync( async (req, res) => {
-        let Listing = await listing.findById(req.params.id);  // renamed variable
-        let newReview = new Review(req.body.review);
-        await newReview.save();
-        Listing.reviews.push(newReview);  // ensure correct array name (reviews)
-        await Listing.save();
-        
-        console.log("new review saved");
-        // res.send("new review saved");
-        res.redirect(`/listings/${Listing._id}`);
-    }));
-
-    // DElete route with list.id and reviews.id
-    app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
-        let{id,reviewId}=req.params;
-        await listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
-        await Review.findByIdAndDelete(reviewId);
-
-        res.redirect(`/listings/${id}`)
-    }));
 
 
     // Root of the server
