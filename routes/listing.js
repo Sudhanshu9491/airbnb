@@ -29,11 +29,15 @@ router.get("/new",(req,res)=>{
     res.render("./listings/new.ejs");
 })
 
-
+// show
 // Inside of any listed item view
 router.get("/:id",wrapAsync(async (req,res,next)=>{
     let {id}=req.params;
     const list = await listing.findById(id).populate("reviews");
+    if(!list){
+        req.flash("error","Listing you request for does not exist!");
+        res.redirect("/listings");
+    }
     console.log(list);
     res.render("./listings/show.ejs",{list});
     // res.send(";dhja");
@@ -59,10 +63,15 @@ router.post("/",validateListing,wrapAsync(async (req,res,next)=>{
 router.get("/:id/edit",wrapAsync(async (req,res)=>{
     let {id} =req.params;
     let data=await listing.findById(id);
+    if(!data){
+        req.flash("error","Listing you request for does not exist!");
+        res.redirect("/listings");
+    }
     res.render("./listings/edit.ejs",{data});
     // res.send("sldfj");
 }))
 
+// Delete
 router.get("/:id/delete",wrapAsync(async (req,res)=>{
     let {id} =req.params;
     console.log(id);

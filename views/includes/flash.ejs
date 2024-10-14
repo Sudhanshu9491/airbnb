@@ -3,3 +3,8 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
     </div>
 <% } %>  
+<% if( error && error.length>0 ){ %>
+  <div class="alert alert-danger alert alert-dismissible fade show mt-2 col-6 offset-3" style="justify-content: space-between;" role="alert"><%= error %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+    </div>
+<% } %>  
