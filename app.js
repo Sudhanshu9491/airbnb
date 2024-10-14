@@ -5,6 +5,7 @@ const path=require('path');
 const methodOverride=require('method-override');
 const ejsMate=require('ejs-mate');
 const ExpressError=require("./utils/ExpressError.js");
+const session=require("express-session");
 
 // Router 
 const listings=require("./routes/listing.js")
@@ -36,6 +37,14 @@ app.use(express.static(path.join(__dirname,"/public")));
 // Router routes
 app.use("/listings",listings);
 app.use("/listings/:id/review",reviews);
+
+const seccionOpitons={
+    secret:"mysupersecretcode",
+    resave:false,
+    saveUninitialized:true
+}
+
+app.use(session(seccionOpitons));
 
 
 // Root of the server
