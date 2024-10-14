@@ -42,7 +42,7 @@ router.get("/:id",wrapAsync(async (req,res,next)=>{
 router.post("/",validateListing,wrapAsync(async (req,res,next)=>{
     const newListing=new listing(req.body.listing);
     await newListing.save();
-    req.flash("success","New Listing Created!");
+    req.flash("success","New Listing Created !");
     res.redirect("/listings");
 }))
 
@@ -51,6 +51,7 @@ router.post("/",validateListing,wrapAsync(async (req,res,next)=>{
     // if nothing will come via hoppscotch then
     let {id}=req.params;
     await listing.findByIdAndUpdate(id,{...req.body.listing});
+    req.flash("success","Listing Updated Successful!");
     res.redirect(`/listings/${id}`);
 }))
 
@@ -61,10 +62,13 @@ router.get("/:id/edit",wrapAsync(async (req,res)=>{
     res.render("./listings/edit.ejs",{data});
     // res.send("sldfj");
 }))
+
 router.get("/:id/delete",wrapAsync(async (req,res)=>{
     let {id} =req.params;
     console.log(id);
     await listing.findByIdAndDelete(id);
+    console.log("deleted successfully")
+    req.flash("success","Listing Deleted Successful!");
     res.redirect("/listings");
     // res.send("sldfj");
 }))

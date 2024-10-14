@@ -49,7 +49,7 @@ app.use(session(sessionOptions));
 app.use(flash());
 
 app.use((req,res,next)=>{
-    console.log("req flash seccess");
+    // console.log("req flash seccess");
     res.locals.success=req.flash("success");
     next();
 })
