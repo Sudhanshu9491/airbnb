@@ -6,6 +6,7 @@ const methodOverride=require('method-override');
 const ejsMate=require('ejs-mate');
 const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
+const flash=require("connect-flash");
 
 // Router 
 const listings=require("./routes/listing.js")
@@ -33,11 +34,6 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
-
-// Router routes
-app.use("/listings",listings);
-app.use("/listings/:id/review",reviews);
-
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
@@ -49,8 +45,19 @@ const sessionOptions = {
     }
 }
 
-
 app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    console.log("req flash seccess");
+    res.locals.success=req.flash("success");
+    next();
+})
+
+// Router routes
+app.use("/listings",listings);
+app.use("/listings/:id/review",reviews);
+
 
 
 // Root of the server
@@ -58,6 +65,7 @@ app.get("/",(req,res)=>{
     res.render("./listings/home.ejs");
     // res.send("This is the set Up of App.js");
 })
+
 
 
 // if any page is not found then this will get the request
