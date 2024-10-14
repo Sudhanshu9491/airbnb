@@ -10,5 +10,5 @@ const userSchema=new Schema({
     // user and password will automatically store in passport npm 
 })
 
-User.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 module.exports=mongoose.model('User',userSchema);

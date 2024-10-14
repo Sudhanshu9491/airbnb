@@ -7,6 +7,9 @@ const ejsMate=require('ejs-mate');
 const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
 const flash=require("connect-flash");
+const passport=require("passport");
+const LocalStrategy=require("passport-local");
+const User=require("./models/user.js");
 
 // Router 
 const listings=require("./routes/listing.js")
@@ -48,11 +51,27 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+// Authentication   
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req,res,next)=>{
     // console.log("req flash seccess");
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
     next();
+})
+
+app.get("/demouser",async(req,res)=>{
+    let fakeUser=new User({
+        email:"abc@gmail.com",
+        username:"Abd"
+    })
+    let registerdUser = await User.register(fakeUser,"hlowusj");
+    res.send(registerdUser);
 })
 
 // Router routes
