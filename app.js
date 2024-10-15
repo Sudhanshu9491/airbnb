@@ -12,8 +12,9 @@ const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");
 
 // Router 
-const listings=require("./routes/listing.js")
-const reviews=require("./routes/review.js")
+const listingsRouter=require("./routes/listing.js")
+const reviewsRouter=require("./routes/review.js")
+const userRouter=require("./routes/user.js")
 
 // Url is taken from mongodb website -->/wanderlust is a project name
 const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
@@ -75,8 +76,9 @@ app.get("/demouser",async(req,res)=>{
 })
 
 // Router routes
-app.use("/listings",listings);
-app.use("/listings/:id/review",reviews);
+app.use("/listings",listingsRouter);
+app.use("/listings/:id/review",reviewsRouter);
+app.use("/",userRouter);
 
 
 
