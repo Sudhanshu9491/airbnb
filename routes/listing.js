@@ -23,9 +23,13 @@ router.get("/",wrapAsync(async (req,res)=>{
     // res.send("All Data Will Show soon");
 }))
 
-// we write this before the listings/:id becouse the listings is same so it is searching the id in the database
+// we write this before the listings/:id because the listings is same so it is searching the id in the database
 // Created new listing
 router.get("/new",(req,res)=>{
+    if(!req.isAuthenticated()){
+        req.flash("error","You must be logged in to create new listing!");
+        return res.redirect("/signup");
+    }
     res.render("./listings/new.ejs");
 })
 
