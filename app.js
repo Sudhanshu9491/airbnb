@@ -63,6 +63,7 @@ app.use((req,res,next)=>{
     // console.log("req flash seccess");
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
+    res.locals.currUser=req.user;
     next();
 })
 
