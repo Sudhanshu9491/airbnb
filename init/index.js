@@ -24,16 +24,17 @@ const initDB=async ()=>{
     }).catch((err)=>{
         console.error(err);
     })
-    await users.deleteMany({}).then(()=>{
-        console.log("User Data Deleted Sucessful");
-    }).catch((err)=>{
-        console.error(err);
-    })
+    // await users.deleteMany({}).then(()=>{
+    //     console.log("User Data Deleted Sucessful");
+    // }).catch((err)=>{
+    //     console.error(err);
+    // })
     await reviews.deleteMany({}).then(()=>{
         console.log("Review Data Deleted Sucessful");
     }).catch((err)=>{
-        console.error(err);
+        console.error(err); 
     })
+    initData.data = initData.data.map((obj)=>({...obj,owner:"6710e09d75d1bc1c100d3adb"}));
     await listing.insertMany(initData.data);
     console.log("Previous Data is Deleted and sample data is added in db");
 }

@@ -27,15 +27,16 @@
     <div class="card listing-card showCard ">
         <img src="<%= list.image %>" class="card-img-top cardShow-img-top" alt="image">
         <div class="card-body">
-            <!-- <h5 class="card-title"><%= list.title %></h5> -->
+            <h5 class="card-title"><b>Owned By:</b> <%= list.owner.username %></h5>
             <p class="card-text"><%= list.description %></p>
-            <ul>
-                <li class="card-text"><%= list.title %></li>
-                <li class="card-text"><%= list.description %></li>
-                <li class="card-text"><span>&#8377;</span><%= Number(list.price).toLocaleString("en-IN") %></li>
-                <li class="card-text"><%= list.location %></li>
-                <li class="card-text"><%= list.country %></li>
-            </ul>
+            <div>
+                <p class="card-text"><b>Title:</b> <%= list.title %></p>
+                <p class="card-text"><b>About:</b> <%= list.description %></p>
+                <p class="card-text"><b>Price:</b> <span>&#8377;</span><%= Number(list.price).toLocaleString("en-IN") %></p>
+                <p class="card-text"><b>Location:</b> <%= list.location %></p>
+                <p class="card-text"><b>Country:</b> <%= list.country %></p>
+            </div>
+            <br>
             <!-- <a href="">Delete</a> -->
             <div style="display: flex; ">
                 <form style="margin-right: 2rem; margin-left: .2rem;" method="get" action="/listings/<%= list._id %>/edit">
