@@ -51,22 +51,27 @@
             <% } %>
         </div>
         <hr>
-        <div class="mb-3 mt-3">
-            <h4>Leave a Review</h4>
-            <form method="POST" action="/listings/<%= list.id %>/review" novalidate class="needs-validation">
-                <div class="mt-3">
-                    <label class="form-label" for="rating">Rating</label>
-                    <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="comment">Comment</label>
-                    <textarea required class="form-control" name="review[comment]" id="comment" cols="30" rows="5"></textarea>
-                    <div class="valid-feedback">&#9989; </div>
-                    <div class="invalid-feedback">Please Enter A Valid Feedback</div>
-                </div> 
-                <button class="btn btn-outline-dark">Submit</button>
-            </form>
-        </div>        
+        <% if(!currUser){ %>
+            <h4 class="cols-4 offset-4">Login For Add Review</h4>
+        <% } %>
+        <% if(currUser){ %>       
+            <div class="mb-3 mt-3">
+                <h4>Leave a Review</h4>
+                <form method="POST" action="/listings/<%= list.id %>/review" novalidate class="needs-validation">
+                    <div class="mt-3">
+                        <label class="form-label" for="rating">Rating</label>
+                        <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="comment">Comment</label>
+                        <textarea required class="form-control" name="review[comment]" id="comment" cols="30" rows="5"></textarea>
+                        <div class="valid-feedback">&#9989; </div>
+                        <div class="invalid-feedback">Please Enter A Valid Feedback</div>
+                    </div> 
+                    <button class="btn btn-outline-dark">Submit</button>
+                </form>
+            </div> 
+        <% }%>       
         <hr>
         <p><b>All Reviews</b></p>
         <div class="row">

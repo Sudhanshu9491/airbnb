@@ -4,12 +4,12 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const listing = require('../models/listing.js');
 const Review = require('../models/review.js');
-const {validateReview} =require("../middleware.js");
+const {validateReview,isLoggedIn} =require("../middleware.js");
 
 
 // Reviews 
 // Post route
-router.post("/", validateReview, wrapAsync(async (req, res) => {
+router.post("/",isLoggedIn, validateReview, wrapAsync(async (req, res) => {
     const { id } = req.params;
     if (!id) {
         throw new ExpressError(404, "Listing ID is required");
@@ -26,6 +26,8 @@ router.post("/", validateReview, wrapAsync(async (req, res) => {
     }
 
     const newReview = new Review(review);
+    newReview.author=req.user._id;
+    // console.log("something about user"+req.user._id);
     Listing.reviews.push(newReview);  
     
     try {
