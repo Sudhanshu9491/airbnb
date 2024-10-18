@@ -78,7 +78,8 @@
             <% for(review of list.reviews) { %>
                 <div class="card col-12 col-md-10 col-lg-5 ms-lg-4 mb-3">
                     <div class="card-body">
-                        <p class="card-title">Sudhanshu Mishra</p>
+                        <b><p class="card-title">Posted By: <%= review.author.username %></p></b>
+                        <% console.log(review.author.username); %>
                         <p class="card-text"><%= review.comment %></p>
                         <p class="card-text" > <%= review.rating %> Stars</p>
                     </div>

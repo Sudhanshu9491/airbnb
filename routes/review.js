@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const listing = require('../models/listing.js');
 const Review = require('../models/review.js');
-const {validateReview,isLoggedIn} =require("../middleware.js");
+const {validateReview,isLoggedIn,isReviewAuthor} =require("../middleware.js");
 
 
 // Reviews 
@@ -43,7 +43,7 @@ router.post("/",isLoggedIn, validateReview, wrapAsync(async (req, res) => {
 }));
 
 // Delete route with list.id and reviews.id
-router.delete("/:reviewId", wrapAsync(async (req, res) => {
+router.delete("/:reviewId",isLoggedIn,isReviewAuthor,wrapAsync(async (req, res) => {
     const { id, reviewId } = req.params;
     if (!id || !reviewId) {
         throw new ExpressError(404, "Listing ID and Review ID are required");
