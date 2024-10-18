@@ -1,20 +1,9 @@
 const express  = require('express');
 const router= express.Router();
 const wrapAsync=require("../utils/wrapAsync.js");
-const ExpressError=require("../utils/ExpressError.js");
-const {listingSchema} =require("../schema.js");
 const listing =require('../models/listing.js');
-const {isLoggedIn} =require("../middleware.js");
+const {isLoggedIn, isOwner, validateListing} =require("../middleware.js");
 
-const validateListing=(req,res,next)=>{
-    let {error} =listingSchema.validate(req.body);
-    // console.log(result);
-    if(error){
-        throw new ExpressError(404,error);
-    }else{
-        next();
-    }
-}
 
 // All data show in all listining
 router.get("/",wrapAsync(async (req,res)=>{
@@ -53,7 +42,7 @@ router.post("/",isLoggedIn,validateListing,wrapAsync(async (req,res,next)=>{
 }))
 
  // Update route
- router.put("/:id",isLoggedIn,validateListing,wrapAsync(async (req,res)=>{
+ router.put("/:id",isLoggedIn,isOwner,validateListing,wrapAsync(async (req,res)=>{
     // if nothing will come via hoppscotch then
     let {id}=req.params;
     await listing.findByIdAndUpdate(id,{...req.body.listing});
@@ -62,7 +51,7 @@ router.post("/",isLoggedIn,validateListing,wrapAsync(async (req,res,next)=>{
 }))
 
 // Edit Route
-router.get("/:id/edit",isLoggedIn,wrapAsync(async (req,res)=>{
+router.get("/:id/edit",isLoggedIn,isOwner,wrapAsync(async (req,res)=>{
     let {id} =req.params;
     let data=await listing.findById(id);
     if(!data){
@@ -74,7 +63,7 @@ router.get("/:id/edit",isLoggedIn,wrapAsync(async (req,res)=>{
 }))
 
 // Delete
-router.get("/:id/delete",isLoggedIn,wrapAsync(async (req,res)=>{
+router.get("/:id/delete",isLoggedIn,isOwner,wrapAsync(async (req,res)=>{
     let {id} =req.params;
     console.log(id);
     await listing.findByIdAndDelete(id);

@@ -38,8 +38,6 @@
             </div>
             <br>
             <!-- <a href="">Delete</a> -->
-            <!-- <% console.log(currUser._id); %>
-            <% console.log(list.owner._id); %> -->
             <% if(currUser && currUser._id.equals(list.owner._id)){ %>
                 <div style="display: flex; ">
                     <form style="margin-right: 2rem; margin-left: .2rem;" method="get" action="/listings/<%= list._id %>/edit">
