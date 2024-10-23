@@ -4,12 +4,15 @@ const wrapAsync = require("../utils/wrapAsync.js");
 // const listing =require('../models/listing.js');
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 // All data show in all listining
 router
   .route("/")
   .get(wrapAsync(listingController.index))
-  .post(isLoggedIn, validateListing, wrapAsync(listingController.newListing));
+  .post(isLoggedIn,upload.single('listing[image]'), validateListing, wrapAsync(listingController.newListing));
+  // .post( upload.single('listing[image]'),(req,res)=>{res.send(req.file);});
 
 // we write this before the listings/:id because the listings is same so it is searching the id in the database
 // Created new listing
