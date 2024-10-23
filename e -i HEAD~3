@@ -1,0 +1,59 @@
+[33mcommit 1a006c42fbb3df4a3c5b1ed49a3e48a05922481f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mrevert-branch[m[33m, [m[1;32mmain[m[33m)[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Wed Oct 23 00:03:43 2024 +0530
+
+    testing
+
+[33mcommit e5d11a6cbe335936cacc31dd01ad0d7d0a3f6c2c[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Wed Oct 23 00:00:59 2024 +0530
+
+    .
+
+[33mcommit e751daf7890703a6c69d33f9a101cb04b431c0de[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Mon Oct 21 06:49:32 2024 +0530
+
+    removed unused file from routes>listing.js
+
+[33mcommit a60e6737868c4601addfe24f4de57fae60f8a693[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Sun Oct 20 20:49:21 2024 +0530
+
+    added css to make review with star
+
+[33mcommit 70958881e6c14d1877d8d20279eb473015224d67[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Sun Oct 20 11:27:35 2024 +0530
+
+    router.route for the user.js
+
+[33mcommit bc4d20102432279490dfd4523df1be2137244f45[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Sun Oct 20 11:23:06 2024 +0530
+
+    router.route for common path but different request get,post,delete
+
+[33mcommit ab15bd76efe2023af2c9bb37fd355101bf58d57d[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Sun Oct 20 11:13:34 2024 +0530
+
+    added controller for user.js to separate the login....etc. logic
+
+[33mcommit 7c2e17b3017478273a80af9b5597d0dca8bf6eae[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Sun Oct 20 11:04:26 2024 +0530
+
+    controller for review to separate teh backend logic
+
+[33mcommit 3a6f7276e641193c6a32663d0784b72fc41b0a80[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Sun Oct 20 10:54:34 2024 +0530
+
+    added controller for listing.js to saperate the backed logic of the code
+
+[33mcommit afc09cbcf1a979e5c7527f261351a625a9d13bf5[m
+Author: sudhanshu <sudhanshumishra9491@gmail.com>
+Date:   Sun Oct 20 10:23:57 2024 +0530
+
+    more finishing
