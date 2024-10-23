@@ -9,13 +9,8 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-    type: String,
-    default:
-      "https://www.shutterstock.com/shutterstock/photos/2316352307/display_1500/stock-vector-photo-coming-soon-picture-frame-no-website-photos-yet-logo-sign-symbol-image-not-available-yet-2316352307.jpg",
-    set: (v) =>
-      v === ""
-        ? "https://www.shutterstock.com/shutterstock/photos/2316352307/display_1500/stock-vector-photo-coming-soon-picture-frame-no-website-photos-yet-logo-sign-symbol-image-not-available-yet-2316352307.jpg"
-        : v,
+    url:String,
+    filename:String
   },
   price: Number,
   location: String,

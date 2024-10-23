@@ -9,7 +9,7 @@
       <% for(list of allListing){ %>
         <div class="card listing-card" >
             <a href="/listings/<%= list._id %>" class="mainA">
-              <img src="<%= list.image %>" class="card-imgg card-img-top" alt="House Imge" />
+              <img src="<%= list.image.url %>" class="card-imgg card-img-top" alt="House Imge" />
               <!-- <div class="card-img-overlay"><b>See Photos</b></div> -->
               <div class="card-body">
               <p style="font-size: large;" class="card-title"><%= list.title %></p>
