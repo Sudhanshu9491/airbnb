@@ -52,7 +52,9 @@ module.exports.edit=async (req,res)=>{
         req.flash("error","Listing you request for does not exist!");
         res.redirect("/listings");
     }
-    res.render("./listings/edit.ejs",{data});
+    let originalImageUrl=data.image.url;
+    originalImageUrl=originalImageUrl.replace("/upload","/upload/h_300,w_250");
+    res.render("./listings/edit.ejs",{data,originalImageUrl});
     // res.send("sldfj");
 };
 
