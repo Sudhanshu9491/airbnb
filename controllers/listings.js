@@ -32,7 +32,15 @@ module.exports.newListing=async (req,res,next)=>{
 module.exports.update=async (req,res)=>{
     // if nothing will come via hoppscotch then
     let {id}=req.params;
-    await listing.findByIdAndUpdate(id,{...req.body.listing});
+    let l = await listing.findByIdAndUpdate(id,{...req.body.listing});
+
+    if(typeof req.file !== "undefined"){
+        let  url=req.file.path;
+        let filename=req.file.filename;
+        l.image={url,filename};
+        await l.save();
+    }
+
     req.flash("success","Listing Updated Successful!");
     res.redirect(`/listings/${id}`);
 };

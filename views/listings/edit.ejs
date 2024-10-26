@@ -15,7 +15,7 @@
     <div class="row mt-3">
         <div class="col-10 offset-1">
             <h3>Edit a listing</h3>
-        <form method="POST" action="/listings/<%= data._id %>?_method=PUT" class="needs-validation" novalidate> 
+        <form method="POST" action="/listings/<%= data._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data"> 
             <div class="md-3">
                 <label for="title" class="form-label">Title : </label>
                 <input required class="form-control" value="<%= data.title %>" type="text" name="listing[title]" placeholder="Enter the title">
@@ -31,8 +31,8 @@
                 <br>
             </div>
             <div class="md-3">
-                <label for="image" class="form-label">Image : </label>
-                <input class="form-control" value="<%= data.image %>" type="text" name="listing[image]" placeholder="Enter the image url/link"><br>
+                <!-- <label for="image" class="form-label">Image : </label> -->
+                <input required class="form-control"  type="file" name="listing[image]" placeholder="Upload New Image"><br>
             </div>
             <div class="row">
                 <div class="md-3 col-md-4">
